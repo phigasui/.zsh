@@ -116,9 +116,9 @@ if [ -d "$HOME/.bin" ] ; then
 fi
 
 # local setting in MacBookAir
-alias brew='env PATH=${PATH/\/Users\/yuta_oohigashi\/.pyenv\/shims:/} brew'
-export EDITOR='emacs-24.4'
-alias rm='rmtrash'
+# alias brew='env PATH=${PATH/\/Users\/yuta_oohigashi\/.pyenv\/shims:/} brew'
+# export EDITOR='emacs-24.4'
+# alias rm='rmtrash'
 
 case "$TERM" in
     dumb | emacs)
