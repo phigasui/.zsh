@@ -100,19 +100,6 @@ alias sudo="sudo " #ローカルのエイリアスを反映させるため
 # source ~/.git-completion.
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.bin" ] ; then
-    PATH="$HOME/.bin:$PATH"
-fi
-if [ -d "$HOME/.pyenv" ] ; then
-    PATH="$HOME/.pyenv/shims:$PATH"
-fi
-if [ -d "$HOME/.rbenv" ] ; then
-    PATH="$HOME/.rbenv/shims:$PATH"
-fi
-if [ -d "$HOME/.julia" ] ; then
-    PATH="$HOME/.julia/usr/bin:$PATH"
-    MXNET_HOME="$HOME/.julia/libmxnet"
-fi
 
 # local setting in MacBookAir
 alias brew='env PATH=${PATH/\/Users\/yuta_oohigashi\/.pyenv\/shims:/} brew'
@@ -140,4 +127,20 @@ esac
 
 if [ -f "$HOME/.zshrc_local" ];then
     . "$HOME/.zshrc_local"
+fi
+
+function loadpath() {
+    libpath=${1:?"You have to specify a library path"}
+    if [ -d "$libpath" ];then #ファイルの存在を確認
+        PATH="$libpath:$PATH"
+    fi
+}
+
+loadpath $HOME/.bin
+loadpath $HOME/.pyenv/shims
+loadpath $HOME/.rbenv/shims
+loadpath $HOME/.julia/usr/bin
+
+if [ -d "$HOME/.julia/libmxnet" ] ; then
+    MXNET_HOME="$HOME/.julia/libmxnet"
 fi
