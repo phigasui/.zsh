@@ -135,3 +135,7 @@ case "$TERM" in
         unsetopt zle
         ;;
 esac
+
+if [ -f "$HOME/.zshrc_local" ];then
+    . "$HOME/.zshrc_local"
+fi
