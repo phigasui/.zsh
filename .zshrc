@@ -125,9 +125,11 @@ if [ -x "`which rmtrash 2>/dev/null`" ]; then
     alias rm='rmtrash'
     alias cleantrash='/bin/rm -rf .Trash/*'
 else
-    alias rm='mv -i $HOME/.Trash/'
+    if ! [ -d "$HOME/.Trash/" ];then
+        mkdir $HOME/.Trash/
+    fi
+    alias rm='mv --backup=numbered --target-directory=${HOME}/.Trash'
 fi
-
 
 case "$TERM" in
     dumb | emacs)
