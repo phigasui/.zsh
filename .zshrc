@@ -110,7 +110,7 @@ if [ -x "`which emacs 2>/dev/null`" ]; then
 fi
 if [ -x "`which rmtrash 2>/dev/null`" ]; then
     alias rm='rmtrash'
-    alias cleantrash='/bin/rm -rf .Trash/*'
+    alias cleantrash='/bin/rm -rf $HOME/.Trash/*'
 else
     if ! [ -d "$HOME/.Trash/" ];then
         mkdir $HOME/.Trash/
