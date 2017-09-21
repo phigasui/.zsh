@@ -68,8 +68,6 @@ bindkey "^N" history-beginning-search-forward-end
 bindkey "^R" history-incremental-pattern-search-backword
 bindkey "^S" history-incremental-pattern-search-forward
 
-# PROMPT="[%n@%m %~](*'0'){"
-
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
@@ -84,41 +82,41 @@ setopt share_history
 
 # export LESS='--tabs=4 --no-init --LONG-PROMPT --ignore-case'
 
-# export PS1="\w (*'0'){ "
-export PATH="$HOME/.pyenv/shims:$PATH"
-export PATH="$HOME/.rbenv/shims:$PATH"
-
 alias ls='ls -GF'
 alias ll='ls -l'
 
-# alias emacs='/usr/local/bin/emacs-24.4'
-# alias vim='emacs'
-# alias vimtutor='emacs /usr/local/share/emacs/24.4/etc/tutorials/TUTORIAL.ja'
-
 alias processing='open -a Processing'
 
-alias cleantrash='/bin/rm -rf .Trash/*'
 alias cp='cp -i'
 alias mv='mv -i'
 alias unmount='diskutil unmount'
-alias timestamp='python3 -c "import time;print(time.time())"'
+alias timestamp='date +%s.%N'
 alias activate='source bin/activate'
 
 alias history='history -E 1'
 alias grep="grep --color"
-alias sudo="sudo "
+alias sudo="sudo " #ローカルのエイリアスを反映させるため
 
 # source ~/.git-completion.
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.bin" ] ; then
-    PATH="$HOME/.bin:$PATH"
-fi
 
 # local setting in MacBookAir
 alias brew='env PATH=${PATH/\/Users\/yuta_oohigashi\/.pyenv\/shims:/} brew'
-export EDITOR='emacs-24.4'
-alias rm='rmtrash'
+if [ -x "`which emacs 2>/dev/null`" ]; then
+    EDITOR='emacs'
+    alias vim='emacs'
+    alias vimtutor='emacs /usr/local/share/emacs/24.4/etc/tutorials/TUTORIAL.ja'
+fi
+if [ -x "`which rmtrash 2>/dev/null`" ]; then
+    alias rm='rmtrash'
+    alias cleantrash='/bin/rm -rf $HOME/.Trash/*'
+else
+    if ! [ -d "$HOME/.Trash/" ];then
+        mkdir $HOME/.Trash/
+    fi
+    alias rm='mv --backup=numbered --target-directory=${HOME}/.Trash'
+fi
 
 case "$TERM" in
     dumb | emacs)
@@ -140,4 +138,24 @@ if exists percol; then
 
     zle -N percol_select_history
     bindkey '^R' percol_select_history
+fi
+
+if [ -f "$HOME/.zshrc_local" ];then
+    . "$HOME/.zshrc_local"
+fi
+
+function loadpath() {
+    libpath=${1:?"You have to specify a library path"}
+    if [ -d "$libpath" ];then #ファイルの存在を確認
+        PATH="$libpath:$PATH"
+    fi
+}
+
+loadpath $HOME/.bin
+loadpath $HOME/.pyenv/shims
+loadpath $HOME/.rbenv/shims
+loadpath $HOME/.julia/usr/bin
+
+if [ -d "$HOME/.julia/libmxnet" ] ; then
+    MXNET_HOME="$HOME/.julia/libmxnet"
 fi
