@@ -59,14 +59,8 @@ autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 
-zle -N history-incremental-pattern-search-forward history-search-end
-zle -N history-incremental-pattern-search-backword history-search-end
-
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
-
-bindkey "^R" history-incremental-pattern-search-backword
-bindkey "^S" history-incremental-pattern-search-forward
 
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
