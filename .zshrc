@@ -90,6 +90,10 @@ alias activate='source bin/activate'
 alias history='history -E 1'
 alias grep="grep --color"
 alias sudo="sudo " #ローカルのエイリアスを反映させるため
+alias e="emacs"
+alias g="git"
+
+alias dev1="ssh dev1"
 
 # source ~/.git-completion.
 
