@@ -32,6 +32,8 @@ PROMPT+="
 autoload -Uz colors
 colors
 
+fpath=(~/.zsh/completion $fpath)
+
 autoload -Uz compinit
 compinit
 
@@ -108,13 +110,13 @@ if [ -x "`which emacs 2>/dev/null`" ]; then
 fi
 if [ -x "`which rmtrash 2>/dev/null`" ]; then
     alias rm='rmtrash'
-    alias cleantrash='/bin/rm -rf $HOME/.Trash/*'
 else
     if ! [ -d "$HOME/.Trash/" ];then
         mkdir $HOME/.Trash/
     fi
     alias rm='mv --backup=numbered --target-directory=${HOME}/.Trash'
 fi
+alias cleantrash='/bin/rm -rf $HOME/.Trash/*'
 
 case "$TERM" in
     dumb | emacs)
@@ -157,3 +159,18 @@ loadpath $HOME/.julia/usr/bin
 if [ -d "$HOME/.julia/libmxnet" ] ; then
     MXNET_HOME="$HOME/.julia/libmxnet"
 fi
+
+if [[ "$TERM" == "dumb" ]]
+then
+  unsetopt zle
+  unsetopt prompt_cr
+  unsetopt prompt_subst
+  if whence -w precmd >/dev/null; then
+    unfunction precmd
+  fi
+  if whence -w preexec >/dev/null; then
+    unfunction preexec
+  fi
+  PS1='$ '
+fi
+                            
