@@ -79,7 +79,7 @@ setopt share_history
 # export LESS='--tabs=4 --no-init --LONG-PROMPT --ignore-case'
 
 alias ls='ls -GF'
-alias ll='ls -l'
+alias ll='ls -l | parrotsay'
 
 alias processing='open -a Processing'
 
@@ -154,10 +154,10 @@ function loadpath() {
 loadpath $HOME/.bin
 loadpath $HOME/.pyenv/shims
 loadpath $HOME/.rbenv/shims
-loadpath $HOME/.julia/usr/bin
+loadpath $HOME/julia/usr/bin
 
-if [ -d "$HOME/.julia/libmxnet" ] ; then
-    MXNET_HOME="$HOME/.julia/libmxnet"
+if [ -d "$HOME/julia/libmxnet" ] ; then
+    MXNET_HOME="$HOME/julia/libmxnet"
 fi
 
 if [[ "$TERM" == "dumb" ]]
