@@ -77,7 +77,7 @@ setopt share_history
 # export LESS='--tabs=4 --no-init --LONG-PROMPT --ignore-case'
 
 alias ls='ls -GF'
-alias ll='ls -l'
+alias ll='ls -l | parrotsay'
 
 alias processing='open -a Processing'
 
