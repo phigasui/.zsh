@@ -152,8 +152,8 @@ function loadpath() {
 loadpath $HOME/.bin
 loadpath $HOME/.pyenv/shims
 loadpath $HOME/.rbenv/shims
-loadpath $HOME/.julia/usr/bin
+loadpath $HOME/julia/usr/bin
 
-if [ -d "$HOME/.julia/libmxnet" ] ; then
-    MXNET_HOME="$HOME/.julia/libmxnet"
+if [ -d "$HOME/julia/libmxnet" ] ; then
+    MXNET_HOME="$HOME/julia/libmxnet"
 fi
