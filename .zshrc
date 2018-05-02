@@ -173,4 +173,5 @@ then
   fi
   PS1='$ '
 fi
-                            
+
+function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
